@@ -1,13 +1,13 @@
-package com.woowahan.pilot.order;
+package com.woowahan.pilot.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WoowahanOrderApplication {
+public class WoowahanUserApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WoowahanOrderApplication.class, args);
+		SpringApplication.run(WoowahanUserApplication.class, args);
 	}
 
 }
