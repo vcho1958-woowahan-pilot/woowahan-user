@@ -31,4 +31,18 @@ class UserTest extends Specification {
         "asd@asd" | "asd123123125"  | "2101231231"   | 1
         "asd@asd" | "asd123123125"  | "010123123122" | 1
     }
+
+    def "닉네임 변경"() {
+        given:
+        def user = new User("default@email.com", "default", "default", "01023332333")
+        expect:
+        user.changeNickName(newNickName)
+        user.getNickname() == result
+        where:
+        newNickName|result
+        "as"|"default"
+        "asdasdasdasda"|"default"
+        "default"|"default"
+        "asd"|"asd"
+    }
 }

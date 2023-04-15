@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import java.util.UUID;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Builder
+@Builder(access = AccessLevel.PRIVATE)
 public class User extends BaseEntity {
 
   @Column(unique = true, length = 30)
