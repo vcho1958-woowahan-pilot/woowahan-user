@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.Length;
 @Builder(access = AccessLevel.PRIVATE)
 public class User extends BaseEntity {
 
-  @Column(unique = true, length = 30)
+  @Column(unique = true, length = 30, updatable = false)
   @Email
   private String email;
   @Column(unique = true, length = 15)
@@ -34,5 +34,23 @@ public class User extends BaseEntity {
 
   public User(UUID id) {
     super(id);
+  }
+
+  public void changeNickName(String nickname) {
+    if (nickname != null) {
+      this.nickname = nickname;
+    }
+  }
+
+  public void changePassword(String password) {
+    if (password != null) {
+      this.password = password;
+    }
+  }
+
+  public void changePhone(String phone) {
+    if (phone != null) {
+      this.phone = phone;
+    }
   }
 }

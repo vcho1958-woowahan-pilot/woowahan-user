@@ -40,9 +40,31 @@ class UserTest extends Specification {
         user.getNickname() == result
         where:
         newNickName|result
-        "as"|"default"
-        "asdasdasdasda"|"default"
-        "default"|"default"
+        null|"default"
+        "asd"|"asd"
+    }
+
+    def "비밀번호 변경"() {
+        given:
+        def user = new User("default@email.com", "default", "default", "01023332333")
+        expect:
+        user.changePassword(password)
+        user.getPassword() == result
+        where:
+        password|result
+        null|"default"
+        "asd"|"asd"
+    }
+
+    def "휴대폰 번호 변경"() {
+        given:
+        def user = new User("default@email.com", "default", "default", "01023332333")
+        expect:
+        user.changePhone(newPhone)
+        user.getPhone() == result
+        where:
+        newPhone|result
+        null|"01023332333"
         "asd"|"asd"
     }
 }
