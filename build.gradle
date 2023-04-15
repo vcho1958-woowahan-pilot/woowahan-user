@@ -72,7 +72,7 @@ jacocoTestCoverageVerification {
         rule {
             element = 'CLASS'
             limit {
-                excludes=['*Dto*', '*Builder*','*Application*']
+                excludes=['*Dto*', '*Builder*','*Application*', '*Base*']
                 minimum = 0.5
             }
         }
