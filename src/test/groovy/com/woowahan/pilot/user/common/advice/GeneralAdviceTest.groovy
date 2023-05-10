@@ -13,24 +13,26 @@ import spock.lang.Specification
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class GeneralAdviceTest extends Specification {
-    private RequestSpecification spec;
+    private RequestSpecification given;
     @LocalServerPort
     private int port;
+
     void setup() {
-        this.spec = new RequestSpecBuilder().build()
+        def spec = new RequestSpecBuilder().build()
         RestAssured.port = port
+        given = RestAssured.given(spec).port(port)
     }
 
     def "BaseException Advice 동작 테스트"() {
-        when:
-        def then = RestAssured.given(this.spec)
+        given:
+        def given = given
                 .accept("application/json")
                 .contentType(ContentType.JSON)
-                .when()
+        when:
+        def when = given.when()
                 .get("/test/custom")
-                .then()
         then:
-        then
+        when.then()
                 .assertThat()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("success", Is.is(false))
@@ -38,15 +40,15 @@ class GeneralAdviceTest extends Specification {
     }
 
     def "InternalException Advice 동작 테스트"() {
-        when:
-        def then = RestAssured.given(this.spec)
+        given:
+        def given = given
                 .accept("application/json")
                 .contentType(ContentType.JSON)
-                .when()
+        when:
+        def when = given.when()
                 .get("/test/internal")
-                .then()
         then:
-        then
+        when.then()
                 .assertThat()
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .body("success", Is.is(false))
